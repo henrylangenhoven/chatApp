@@ -1,0 +1,12 @@
+<div id="plist" class="people-list">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text h-100"><em class="fa fa-search"></em></span>
+    </div>
+    <input type="text" class="form-control" placeholder="Search...">
+  </div>
+  <ul class="list-unstyled chat-list mt-2 mb-0">
+
+      <app-contact-item *ngFor="let contact of contacts" [contact]="contact"></app-contact-item>
+  </ul>
+</div>

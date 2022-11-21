@@ -1,0 +1,9 @@
+<li class="clearfix">
+  <div class="message-data text-right">
+    <span class="message-data-time">{{message.time}}</span>
+    <img *ngIf="message.avatarUrl" [src]="message.avatarUrl" alt="avatar">
+  </div>
+  <div class="message" [ngClass]="message.myMessage? 'my-message  float-right' : 'other-message'">
+    {{message.body}}
+  </div>
+</li>

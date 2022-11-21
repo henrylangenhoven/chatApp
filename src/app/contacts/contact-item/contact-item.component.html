@@ -1,0 +1,7 @@
+<li class="clearfix" [ngClass]="contact.active ? 'active':''">
+  <img [src]="contact.avatarUrl" alt="avatar">
+  <div class="about">
+    <div class="name">{{contact.name}}</div>
+    <div class="status"><em class="fa fa-circle" [ngClass]="contact.status"></em> {{contact.statusMessage}} </div>
+  </div>
+</li>
