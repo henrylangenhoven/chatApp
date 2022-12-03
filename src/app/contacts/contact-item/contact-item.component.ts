@@ -10,7 +10,7 @@ export class ContactItemComponent {
   @Input() public contact: Contact = {
     name: "Dummy",
     avatarUrl: "https://bootdey.com/img/Content/avatar/avatar1.png",
-    status: "online",
-    statusMessage: "status message"
+    status: "Online",
+    badge: 5
   };
 }

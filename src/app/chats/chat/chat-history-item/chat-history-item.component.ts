@@ -8,8 +8,10 @@ import {Message} from "../chat-history/message.model";
 })
 export class ChatHistoryItemComponent {
   @Input() public message: Message = {
+    name: "Dummy Dum",
     body: "dummy",
-    time: "long time ago",
-    avatarUrl: "https://bootdey.com/img/Content/avatar/avatar7.png"
+    time: "2:33am",
+    avatarUrl: "https://bootdey.com/img/Content/avatar/avatar7.png",
+    myMessage: true
   };
 }

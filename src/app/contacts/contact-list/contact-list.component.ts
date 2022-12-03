@@ -9,41 +9,46 @@ import {Contact} from "../contact-item/contact.model";
 export class ContactListComponent {
   public contacts: Contact[] = [
     {
-      name: "Vincent Porter",
-      avatarUrl: "https://bootdey.com/img/Content/avatar/avatar1.png",
-      status: "offline",
-      statusMessage: "left 7 mins ago",
+      name: 'Vanessa Tucker',
+      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar5.png',
+      status: 'Online',
+      badge: 5
     },
     {
-      name: "Aiden Chavez",
-      avatarUrl: "https://bootdey.com/img/Content/avatar/avatar2.png",
-      status: "online",
-      statusMessage: "online",
-      active: true
+      name: 'William Harris',
+      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar2.png',
+      status: 'Online',
+      badge: 2
     },
     {
-      name: "Mike Thomas",
-      avatarUrl: "https://bootdey.com/img/Content/avatar/avatar3.png",
-      status: "online",
-      statusMessage: "online"
+      name: 'Sharon Lessman',
+      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar3.png',
+      status: 'Online'
     },
     {
-      name: "Christian Kelly",
-      avatarUrl: "https://bootdey.com/img/Content/avatar/avatar7.png",
-      status: "offline",
-      statusMessage: "left 10 hours ago"
+      name: 'Christina Mason',
+      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar4.png',
+      status: 'Offline'
     },
     {
-      name: "Monica Ward",
-      avatarUrl: "https://bootdey.com/img/Content/avatar/avatar8.png",
-      status: "online",
-      statusMessage: "online"
+      name: 'Fiona Green',
+      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar5.png',
+      status: 'Offline'
     },
     {
-      name: "Dean Henry",
-      avatarUrl: "https://bootdey.com/img/Content/avatar/avatar3.png",
-      status: "offline",
-      statusMessage: "offline since Oct 28"
-    }
+      name: 'Doris Wilder',
+      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar2.png',
+      status: 'Offline'
+    },
+    {
+      name: 'Haley Kennedy',
+      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar4.png',
+      status: 'Offline'
+    },
+    {
+      name: 'Jennifer Chang',
+      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar3.png',
+      status: 'Offline'
+    },
   ];
 }

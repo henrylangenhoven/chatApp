@@ -1,9 +1,13 @@
-<li class="clearfix">
-  <div class="message-data" [ngClass]="message.myMessage? 'text-right' : ''">
-    <span class="message-data-time">{{message.time}}</span>
-    <img *ngIf="message.avatarUrl" [src]="message.avatarUrl" alt="avatar">
+<div class="pb-4" [ngClass]="message.myMessage ? 'chat-message-right' : 'chat-message-left'">
+  <div>
+    <img [src]="message.avatarUrl"
+         class="rounded-circle mx-2"
+         [alt]="message.name"
+         width="40" height="40">
+    <div class="text-muted small text-nowrap mt-2">{{message.time}}</div>
   </div>
-  <div class="message" [ngClass]="message.myMessage? 'my-message  float-right' : 'other-message'">
+  <div class="flex-shrink-1 bg-light rounded py-2 px-3 mx-2">
+    <div class="fw-bold mb-1">{{message.myMessage ? 'You' : message.name}}</div>
     {{message.body}}
   </div>
-</li>
+</div>
