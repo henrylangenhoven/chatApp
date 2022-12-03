@@ -6,4 +6,4 @@
   </div>
 </div>
 
-<app-contact-item *ngFor="let contact of contacts" [contact]="contact"></app-contact-item>
+<app-contact-item *ngFor="let contact of contacts$ | async" [contact]="contact "></app-contact-item>

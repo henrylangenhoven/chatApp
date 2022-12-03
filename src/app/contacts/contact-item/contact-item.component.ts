@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Contact} from "./contact.model";
+import {ContactService} from "../contact.service";
 
 @Component({
   selector: 'app-contact-item',
@@ -14,7 +15,10 @@ export class ContactItemComponent {
     badge: 5
   };
 
+
+  constructor(private contactService:ContactService) {}
+
   clicked() {
-    alert(this.contact.name + ' clicked')
+    this.contactService.setSelectedContact(this.contact)
   }
 }
