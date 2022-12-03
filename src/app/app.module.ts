@@ -11,6 +11,7 @@ import {ChatHeaderComponent} from './chats/chat/chat-header/chat-header.componen
 import {ChatHistoryComponent} from './chats/chat/chat-history/chat-history.component';
 import {ChatMessageComponent} from './chats/chat/chat-message/chat-message.component';
 import {ChatHistoryItemComponent} from './chats/chat/chat-history-item/chat-history-item.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {ChatHistoryItemComponent} from './chats/chat/chat-history-item/chat-hist
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-chat-message',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./chat-message.component.scss']
 })
 export class ChatMessageComponent {
+  message: string = '';
 
+  send() {
+    alert(this.message) // TODO: do the sending
+  }
 }
