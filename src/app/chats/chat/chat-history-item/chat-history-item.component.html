@@ -1,5 +1,5 @@
 <li class="clearfix">
-  <div class="message-data text-right">
+  <div class="message-data" [ngClass]="message.myMessage? 'text-right' : ''">
     <span class="message-data-time">{{message.time}}</span>
     <img *ngIf="message.avatarUrl" [src]="message.avatarUrl" alt="avatar">
   </div>
