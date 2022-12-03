@@ -13,4 +13,8 @@ export class ContactItemComponent {
     status: "Online",
     badge: 5
   };
+
+  clicked() {
+    alert(this.contact.name + ' clicked')
+  }
 }
