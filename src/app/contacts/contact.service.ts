@@ -61,6 +61,12 @@ export class ContactService {
     return of(this.contacts)
   }
 
+  getFilteredContacts(filterValue: string): Observable<Contact[]> {
+    return !!filterValue
+      ? of(this.contacts.filter(value => value.name.trim().toLowerCase().indexOf(filterValue.trim().toLowerCase()) !== -1))
+      : this.getContacts();
+  }
+
   setSelectedContact(contact: Contact) {
     this.selectedContact = contact;
     alert(this.selectedContact.name + ' clicked')

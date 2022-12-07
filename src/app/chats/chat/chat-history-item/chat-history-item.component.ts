@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/core';
 import {Message} from "../chat-history/message.model";
 
 @Component({
@@ -6,7 +6,7 @@ import {Message} from "../chat-history/message.model";
   templateUrl: './chat-history-item.component.html',
   styleUrls: ['./chat-history-item.component.scss']
 })
-export class ChatHistoryItemComponent implements OnInit {
+export class ChatHistoryItemComponent implements AfterViewInit {
   @Output() newMessageAppears = new EventEmitter<void>();
   @Input() public message: Message = {
     name: "Dummy Dum",
@@ -16,7 +16,7 @@ export class ChatHistoryItemComponent implements OnInit {
     myMessage: true
   };
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.newMessageAppears.emit();
   }
 }

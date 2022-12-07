@@ -9,6 +9,7 @@ import {Observable, of} from "rxjs";
   styleUrls: ['./contact-list.component.scss']
 })
 export class ContactListComponent implements OnInit {
+  public filterValue: string = '';
   public contacts$: Observable<Contact[]> = of([]);
 
 
@@ -17,5 +18,9 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit(): void {
     this.contacts$ = this.contactService.getContacts();
+  }
+
+  filterContacts() {
+    this.contacts$ = this.contactService.getFilteredContacts(this.filterValue);
   }
 }

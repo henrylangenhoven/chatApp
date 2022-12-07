@@ -1,6 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Message} from "./message.model";
-import {Observable, of, tap} from "rxjs";
+import {Observable, of} from "rxjs";
 import {MessageService} from "../../message.service";
 
 @Component({
@@ -8,7 +8,7 @@ import {MessageService} from "../../message.service";
   templateUrl: './chat-history.component.html',
   styleUrls: ['./chat-history.component.scss']
 })
-export class ChatHistoryComponent implements OnInit {
+export class ChatHistoryComponent implements OnInit,AfterViewInit {
   @ViewChild("bottom") bottomElement: ElementRef<HTMLInputElement> = {} as ElementRef;
 
   public messages$: Observable<Message[]> = of([]);
@@ -16,15 +16,17 @@ export class ChatHistoryComponent implements OnInit {
   constructor(private messageService: MessageService) {
   }
 
+  ngAfterViewInit(): void {
+        this.scrollToBottom();
+    }
+
   ngOnInit(): void {
-    this.messages$ = this.messageService.getMessages().pipe(tap(value => console.log(value)));
-    this.scrollToBottom();
+    this.messages$ = this.messageService.getMessages();
   }
 
   scrollToBottom(): void {
     try {
       this.bottomElement.nativeElement.scrollIntoView({ behavior: "smooth", block: "start" });
-    } catch(err) {
-      console.log(err);}
+    } catch(err) {}
   }
 }
