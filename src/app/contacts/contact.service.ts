@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Contact} from "./contact-item/contact.model";
-import {Observable, of} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -51,10 +51,10 @@ export class ContactService {
     },
   ];
 
-  private selectedContact: Contact;
+  private selectedContact: BehaviorSubject<Contact>;
 
   constructor() {
-    this.selectedContact = this.contacts[0]
+    this.selectedContact = new BehaviorSubject<Contact>(this.contacts[0])
   }
 
   getContacts(): Observable<Contact[]> {
@@ -68,7 +68,10 @@ export class ContactService {
   }
 
   setSelectedContact(contact: Contact) {
-    this.selectedContact = contact;
-    alert(this.selectedContact.name + ' clicked')
+    this.selectedContact.next(contact);
+  }
+
+  getSelectedContact(): Observable<Contact> {
+    return this.selectedContact;
   }
 }
