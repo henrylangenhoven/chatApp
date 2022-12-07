@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Message} from "../chat-history/message.model";
 
 @Component({
@@ -6,7 +6,8 @@ import {Message} from "../chat-history/message.model";
   templateUrl: './chat-history-item.component.html',
   styleUrls: ['./chat-history-item.component.scss']
 })
-export class ChatHistoryItemComponent {
+export class ChatHistoryItemComponent implements OnInit {
+  @Output() newMessageAppears = new EventEmitter<void>();
   @Input() public message: Message = {
     name: "Dummy Dum",
     body: "dummy",
@@ -14,4 +15,8 @@ export class ChatHistoryItemComponent {
     avatarUrl: "https://bootdey.com/img/Content/avatar/avatar7.png",
     myMessage: true
   };
+
+  ngOnInit(): void {
+    this.newMessageAppears.emit();
+  }
 }
