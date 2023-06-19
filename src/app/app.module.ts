@@ -12,6 +12,7 @@ import {ChatHistoryComponent} from './chats/chat/chat-history/chat-history.compo
 import {ChatMessageComponent} from './chats/chat/chat-message/chat-message.component';
 import {ChatHistoryItemComponent} from './chats/chat/chat-history-item/chat-history-item.component';
 import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {FormsModule} from "@angular/forms";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     NgOptimizedImage,
     FormsModule
   ],

@@ -13,6 +13,6 @@ export class AppComponent {
 
   constructor(private userService: UserService) { // TODO: remove this once user service is used somewhere else
     this.user = this.userService.getOrCreateUser();
-    console.log(this.user)
+    // console.log(this.user) // TODO: move it or lose it
   }
 }

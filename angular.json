@@ -33,7 +33,9 @@
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.css"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.js"]
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -69,7 +71,8 @@
               "browserTarget": "chatApp:build:production"
             },
             "development": {
-              "browserTarget": "chatApp:build:development"
+              "browserTarget": "chatApp:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

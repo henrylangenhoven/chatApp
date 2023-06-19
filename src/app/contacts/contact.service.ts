@@ -1,69 +1,38 @@
 import {Injectable} from '@angular/core';
 import {Contact} from "./contact-item/contact.model";
-import {BehaviorSubject, Observable, of} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-  private contacts: Contact[] = [
-    {
-      name: 'Vanessa Tucker',
-      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar5.png',
-      status: 'Online',
-      badge: 5
-    },
-    {
-      name: 'William Harris',
-      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      status: 'Online',
-      badge: 2
-    },
-    {
-      name: 'Sharon Lessman',
-      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar3.png',
-      status: 'Online'
-    },
-    {
-      name: 'Christina Mason',
-      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar4.png',
-      status: 'Offline'
-    },
-    {
-      name: 'Fiona Green',
-      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar5.png',
-      status: 'Offline'
-    },
-    {
-      name: 'Doris Wilder',
-      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      status: 'Offline'
-    },
-    {
-      name: 'Haley Kennedy',
-      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar4.png',
-      status: 'Offline'
-    },
-    {
-      name: 'Jennifer Chang',
-      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar3.png',
-      status: 'Offline'
-    },
-  ];
+  contacts$: Observable<Contact[]> = this.http.get('/api/contacts') as Observable<Contact[]>;
 
-  private selectedContact: BehaviorSubject<Contact>;
+  private readonly selectedContact: BehaviorSubject<Contact>;
 
-  constructor() {
-    this.selectedContact = new BehaviorSubject<Contact>(this.contacts[0])
+  constructor(private http: HttpClient) {
+    // TODO: remove defualt and handle login
+    this.selectedContact = new BehaviorSubject<Contact>({
+      "name": "Vanessa Tucker",
+      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar5.png",
+      "status": "Online",
+      "badge": 5
+    })
+
+
+    this.contacts$.subscribe((contacts: Contact[]) => {
+      this.setSelectedContact(contacts[0]);
+    });
   }
 
   getContacts(): Observable<Contact[]> {
-    return of(this.contacts)
+    return this.contacts$;
   }
 
   getFilteredContacts(filterValue: string): Observable<Contact[]> {
     return !!filterValue
-      ? of(this.contacts.filter(value => value.name.trim().toLowerCase().indexOf(filterValue.trim().toLowerCase()) !== -1))
+      ? this.contacts$.pipe(map(value => value.filter(value => value.name.trim().toLowerCase().indexOf(filterValue.trim().toLowerCase()) !== -1)))
       : this.getContacts();
   }
 
