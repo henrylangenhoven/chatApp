@@ -5,6 +5,5 @@ export interface Message {
   messageBody?: string;
   createdDate?: Date;
   parentMessageId?: string;
-  expirationDate?: Date;
   isRead?: boolean;
 }
