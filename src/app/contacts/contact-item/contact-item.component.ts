@@ -16,9 +16,10 @@ export class ContactItemComponent {
   };
 
 
-  constructor(private contactService:ContactService) {}
+  constructor(private contactService: ContactService) {
+  }
 
-  clicked() {
+  contactItemClicked() {
     this.contactService.setSelectedContact(this.contact)
   }
 }
