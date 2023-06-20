@@ -37,7 +37,11 @@ export class UserService {
 
   getOrCreateUser(): Observable<User> {
     return this.user$.pipe(
-      switchMap((value, index) => {
+      switchMap((value) => {
+        if (!!value && !!value.id) {
+          return of(value);
+        }
+
         return (this.http.get(`/api/users/${this.getUserId()}`) as Observable<User>).pipe(
           catchError((err, caught) => {
             console.error('failed to get user with id', this.getUserId(), err);

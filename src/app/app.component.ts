@@ -10,7 +10,7 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 })
 export class AppComponent {
   title = 'chatApp';
-  user: User = {};
+  user?: User;
 
   constructor(private userService: UserService) {
     this.userService.getOrCreateUser().pipe(takeUntilDestroyed()).subscribe(value => this.user = value);
