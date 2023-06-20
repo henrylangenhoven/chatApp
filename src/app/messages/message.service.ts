@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Message} from "./chat/chat-history/message.model";
+import {Message} from "../chats/chat/chat-history/message.model";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import * as uuid from "uuid";
@@ -28,8 +28,7 @@ export class MessageService {
     }
 
     let objectObservable = this.http.post('/api/messages', body);
-    objectObservable.subscribe((data) => {
-      console.log('yo');
+    objectObservable.subscribe(() => {
       this.messages$ = this.http.get('/api/messages') as Observable<Message[]>
     });
 

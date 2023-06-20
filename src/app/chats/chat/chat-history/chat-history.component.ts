@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Message} from "./message.model";
 import {Observable} from "rxjs";
-import {MessageService} from "../../message.service";
+import {MessageService} from "../../../messages/message.service";
 
 @Component({
   selector: 'app-chat-history',
