@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import * as uuid from "uuid";
-import {User} from "./user.model";
-import {HttpClient} from "@angular/common/http";
-import {catchError, Observable, of, switchMap} from "rxjs";
+import { Injectable } from '@angular/core';
+import * as uuid from 'uuid';
+import { User } from './user.model';
+import { HttpClient } from '@angular/common/http';
+import { catchError, Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   private readonly userId: string;
@@ -53,16 +53,17 @@ export class UserService {
               return of(value1);
             }
 
-            let name = prompt("Please enter your name") || "Harry Potter";
-            let avatarUrl = prompt("Please enter your avatar url") || "https://bootdey.com/img/Content/avatar/avatar1.png";
+            let name = prompt('Please enter your name') || 'Harry Potter';
+            let avatarUrl =
+              prompt('Please enter your avatar url') || 'https://bootdey.com/img/Content/avatar/avatar1.png';
 
-            return (this.http.post('/api/users', {
+            return this.http.post('/api/users', {
               id: this.getUserId(),
               name,
               avatarUrl,
               createdDate: new Date(),
-              isOnline: true
-            }) as Observable<User>);
+              isOnline: true,
+            }) as Observable<User>;
           })
         );
       })
@@ -70,7 +71,7 @@ export class UserService {
   }
 
   isOnline(userId: string): boolean {
-    return true;// TODO: implement
+    return true; // TODO: implement
   }
 
   logout(): void {

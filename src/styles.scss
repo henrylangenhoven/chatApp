@@ -3,11 +3,11 @@ body {
 }
 
 .chat-online {
-  color: #34ce57
+  color: #34ce57;
 }
 
 .chat-offline {
-  color: #e4606d
+  color: #e4606d;
 }
 
 .contact-list {
@@ -19,22 +19,22 @@ body {
   display: flex;
   flex-direction: column;
   max-height: 72vh;
-  overflow-y: scroll
+  overflow-y: scroll;
 }
 
 .chat-message-left,
 .chat-message-right {
   display: flex;
-  flex-shrink: 0
+  flex-shrink: 0;
 }
 
 .chat-message-left {
-  margin-right: auto
+  margin-right: auto;
 }
 
 .chat-message-right {
   flex-direction: row-reverse;
-  margin-left: auto
+  margin-left: auto;
 }
 
 .py-3 {

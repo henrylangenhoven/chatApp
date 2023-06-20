@@ -1,18 +1,18 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {ContactListComponent} from './contacts/contact-list/contact-list.component';
-import {ContactItemComponent} from './contacts/contact-item/contact-item.component';
-import {NgOptimizedImage} from "@angular/common";
-import {ChatComponent} from './chats/chat/chat.component';
-import {ChatHeaderComponent} from './chats/chat/chat-header/chat-header.component';
-import {ChatHistoryComponent} from './chats/chat/chat-history/chat-history.component';
-import {ChatMessageComponent} from './chats/chat/chat-message/chat-message.component';
-import {ChatHistoryItemComponent} from './chats/chat/chat-history-item/chat-history-item.component';
-import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { ContactListComponent } from './contacts/contact-list/contact-list.component';
+import { ContactItemComponent } from './contacts/contact-item/contact-item.component';
+import { NgOptimizedImage } from '@angular/common';
+import { ChatComponent } from './chats/chat/chat.component';
+import { ChatHeaderComponent } from './chats/chat/chat-header/chat-header.component';
+import { ChatHistoryComponent } from './chats/chat/chat-history/chat-history.component';
+import { ChatMessageComponent } from './chats/chat/chat-message/chat-message.component';
+import { ChatHistoryItemComponent } from './chats/chat/chat-history-item/chat-history-item.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,17 +23,10 @@ import {HttpClientModule} from "@angular/common/http";
     ChatHeaderComponent,
     ChatHistoryComponent,
     ChatMessageComponent,
-    ChatHistoryItemComponent
+    ChatHistoryItemComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgOptimizedImage,
-    FormsModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgOptimizedImage, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

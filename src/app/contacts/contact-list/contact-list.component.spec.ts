@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {ContactListComponent} from './contact-list.component';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {FormsModule} from "@angular/forms";
+import { ContactListComponent } from './contact-list.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FormsModule } from '@angular/forms';
 
 describe('ContactListComponent', () => {
   let component: ContactListComponent;
@@ -10,9 +10,9 @@ describe('ContactListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ContactListComponent], imports: [FormsModule, HttpClientTestingModule]
-    })
-      .compileComponents();
+      declarations: [ContactListComponent],
+      imports: [FormsModule, HttpClientTestingModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ContactListComponent);
     component = fixture.componentInstance;

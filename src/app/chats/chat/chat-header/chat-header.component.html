@@ -1,18 +1,26 @@
 <div class="py-2 px-4 border-bottom d-none d-lg-block">
   <div class="d-flex align-items-center py-1">
     <div class="position-relative pe-none user-select-none">
-      <img [src]="contact.avatarUrl" class="rounded-circle mr-1" [alt]="contact.name"
-           width="40" height="40">
+      <img [src]="contact.avatarUrl" class="rounded-circle mr-1" [alt]="contact.name" width="40" height="40" />
     </div>
     <div class="flex-grow-1 px-3 pe-none user-select-none">
-      <strong>{{contact.name}}</strong>
+      <strong>{{ contact.name }}</strong>
       <div class="text-muted small"><em>Typing...</em></div>
     </div>
     <div>
       <button class="btn btn-light border btn-lg px-3" (click)="settingsClicked()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             class="feather feather-more-horizontal feather-lg">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-more-horizontal feather-lg"
+        >
           <circle cx="12" cy="12" r="1"></circle>
           <circle cx="19" cy="12" r="1"></circle>
           <circle cx="5" cy="12" r="1"></circle>

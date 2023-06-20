@@ -1,24 +1,25 @@
-import {TestBed} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {AppComponent} from './app.component';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {ContactListComponent} from "./contacts/contact-list/contact-list.component";
-import {ChatComponent} from "./chats/chat/chat.component";
-import {ChatHeaderComponent} from "./chats/chat/chat-header/chat-header.component";
-import {ChatHistoryComponent} from "./chats/chat/chat-history/chat-history.component";
-import {ChatMessageComponent} from "./chats/chat/chat-message/chat-message.component";
-import {FormsModule} from "@angular/forms";
+import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ContactListComponent } from './contacts/contact-list/contact-list.component';
+import { ChatComponent } from './chats/chat/chat.component';
+import { ChatHeaderComponent } from './chats/chat/chat-header/chat-header.component';
+import { ChatHistoryComponent } from './chats/chat/chat-history/chat-history.component';
+import { ChatMessageComponent } from './chats/chat/chat-message/chat-message.component';
+import { FormsModule } from '@angular/forms';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule,
-        RouterTestingModule,
-        FormsModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule, FormsModule],
       declarations: [
         AppComponent,
-        ContactListComponent, ChatComponent, ChatHeaderComponent, ChatHistoryComponent, ChatMessageComponent
+        ContactListComponent,
+        ChatComponent,
+        ChatHeaderComponent,
+        ChatHistoryComponent,
+        ChatMessageComponent,
       ],
     }).compileComponents();
   });
