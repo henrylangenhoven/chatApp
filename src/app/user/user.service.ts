@@ -43,11 +43,11 @@ export class UserService {
         }
 
         return (this.http.get(`/api/users/${this.getUserId()}`) as Observable<User>).pipe(
-          catchError((err, caught) => {
+          catchError((err) => {
             console.error('failed to get user with id', this.getUserId(), err);
             return of(null);
           }),
-          switchMap((value1, index1) => {
+          switchMap((value1) => {
             if (!!value1) {
               this.user$ = of(value1);
               return of(value1);
@@ -71,5 +71,11 @@ export class UserService {
 
   isOnline(userId: string): boolean {
     return true;// TODO: implement
+  }
+
+  logout(): void {
+    localStorage.removeItem(`userId`);
+    this.user$ = of({});
+    window.location.reload();
   }
 }

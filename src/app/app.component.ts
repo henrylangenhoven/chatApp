@@ -15,4 +15,9 @@ export class AppComponent {
   constructor(private userService: UserService) {
     this.userService.getOrCreateUser().pipe(takeUntilDestroyed()).subscribe(value => this.user = value);
   }
+
+  logout() {
+    if (confirm('Are you sure you want to logout?'))
+      this.userService.logout();
+  }
 }

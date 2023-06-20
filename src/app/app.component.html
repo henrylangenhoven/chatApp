@@ -1,7 +1,17 @@
 <main class="content">
   <div class="container p-0">
 
-    <h1 class="h3 mb-3">ChatApp <span class="text-secondary float-end">{{user?.name}}</span></h1>
+    <h1 class="h3 mb-3">ChatApp
+      <span class="text-secondary float-end cursor-pointer"
+            role="button"
+            (click)="logout()">
+        {{user?.name}}
+        <img [src]="user?.avatarUrl"
+             class="rounded-circle mx-2"
+             [alt]="user?.name"
+             width="40" height="40">
+    </span>
+    </h1>
 
     <div class="card">
       <div class="row g-0">
