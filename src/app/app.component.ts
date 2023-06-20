@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {UserService} from "./user/user.service";
 import {User} from "./user/user.model";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,9 @@ import {User} from "./user/user.model";
 })
 export class AppComponent {
   title = 'chatApp';
-  user?: User;
+  user: User = {};
 
-  constructor(private userService: UserService) { // TODO: remove this once user service is used somewhere else
-    this.user = this.userService.getOrCreateUser();
-    // console.log(this.user) // TODO: move it or lose it
+  constructor(private userService: UserService) {
+    this.userService.getOrCreateUser().pipe(takeUntilDestroyed()).subscribe(value => this.user = value);
   }
 }
