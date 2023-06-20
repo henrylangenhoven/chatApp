@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "api": "json-server api/db.json --routes api/routes.json --no-cors=true",
-    "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\""
+    "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html,.json,.yaml,.yml}\"",
+    "format:prettier": "npx prettier --write . --check"
   },
   "private": true,
   "dependencies": {
