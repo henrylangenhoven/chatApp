@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as uuid from 'uuid';
-import {User} from './user.model';
-import {HttpClient} from '@angular/common/http';
-import {catchError, Observable, of, switchMap} from 'rxjs';
+import { User } from './user.model';
+import { HttpClient } from '@angular/common/http';
+import { catchError, Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -55,7 +55,8 @@ export class UserService {
 
             let name = prompt('Please enter your name') || 'Harry Potter';
             let avatarUrl =
-              prompt('Please enter your avatar url. Leave empty for defaults') || 'https://bootdey.com/img/Content/avatar/avatar1.png';
+              prompt('Please enter your avatar url. Leave empty for defaults') ||
+              'https://bootdey.com/img/Content/avatar/avatar1.png';
 
             return this.http.post('/api/users', {
               id: this.getUserId(),
