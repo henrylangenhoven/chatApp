@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Message } from '../chats/chat/chat-history/message.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import * as uuid from 'uuid';
 
@@ -8,9 +8,11 @@ import * as uuid from 'uuid';
   providedIn: 'root',
 })
 export class MessageService {
-  messages$: Observable<Message[]> = this.http.get('/api/messages') as Observable<Message[]>;
+  messages$: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.http.get('/api/messages').subscribe((messages) => this.messages$.next(messages as Message[]));
+  }
 
   getMessages(): Observable<Message[]> {
     return this.messages$;
@@ -26,9 +28,6 @@ export class MessageService {
       avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar1.png',
     };
 
-    let objectObservable = this.http.post('/api/messages', body);
-    objectObservable.subscribe(() => {
-      this.messages$ = this.http.get('/api/messages') as Observable<Message[]>;
-    });
+    this.messages$.next([...this.messages$.getValue(), body]);
   }
 }
