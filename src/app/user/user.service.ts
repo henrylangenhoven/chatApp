@@ -12,10 +12,10 @@ export class UserService {
   private user$: Observable<User> = of({});
 
   constructor(private http: HttpClient) {
-    this.userId = this.getUserId();
+    this.userId = this.getCurrentUserId();
   }
 
-  getUserId(): string {
+  getCurrentUserId(): string {
     if (!!this.userId) {
       return this.userId;
     }
@@ -35,40 +35,49 @@ export class UserService {
     return userIdFromStorage;
   }
 
-  getOrCreateUser(): Observable<User> {
+  getCurrentUserOrCreate(): Observable<User> {
     return this.user$.pipe(
       switchMap((value) => {
         if (!!value && !!value.id) {
           return of(value);
         }
 
-        return (this.http.get(`/api/users/${this.getUserId()}`) as Observable<User>).pipe(
+        return (this.http.get(`/api/users/${this.getCurrentUserId()}`) as Observable<User>).pipe(
           catchError((err) => {
-            console.error('failed to get user with id', this.getUserId(), err);
+            console.error('failed to get user with id', this.getCurrentUserId(), err);
             return of(null);
           }),
-          switchMap((value1) => {
-            if (!!value1) {
-              this.user$ = of(value1);
-              return of(value1);
+          switchMap((user) => {
+            if (!!user) {
+              this.user$ = of(user);
+              return of(user);
             }
 
-            let name = prompt('Please enter your name') || 'Harry Potter';
-            let avatarUrl =
-              prompt('Please enter your avatar url. Leave empty for defaults') ||
-              'https://bootdey.com/img/Content/avatar/avatar1.png';
-
-            return this.http.post('/api/users', {
-              id: this.getUserId(),
-              name,
-              avatarUrl,
-              createdDate: new Date(),
-              isOnline: true,
-            }) as Observable<User>;
+            return this.createNewUser('', '', true);
           })
         );
       })
     );
+  }
+
+  createNewUser(name: string, avatarUrl: string, isOnline: boolean): Observable<User> {
+    if (!name) {
+      name = prompt('Please enter your name') || 'Harry Potter';
+    }
+
+    if (!avatarUrl) {
+      avatarUrl =
+        prompt('Please enter your avatar url. Leave empty for defaults') ||
+        `https://bootdey.com/img/Content/avatar/avatar${this.getRandomNumberBetween(1, 8)}.png`;
+    }
+
+    return this.http.post('/api/users', {
+      id: uuid.v4(),
+      name,
+      avatarUrl,
+      createdDate: new Date(),
+      isOnline,
+    }) as Observable<User>;
   }
 
   isOnline(userId: string): boolean {
@@ -79,5 +88,9 @@ export class UserService {
     localStorage.removeItem(`userId`);
     this.user$ = of({});
     window.location.reload();
+  }
+
+  private getRandomNumberBetween(first: number, last: number) {
+    return Math.floor(Math.random() * last) + first;
   }
 }
