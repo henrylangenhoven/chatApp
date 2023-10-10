@@ -2,27 +2,25 @@ import { Injectable } from '@angular/core';
 import { Contact } from './contact-item/contact.model';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactService {
-  contacts$: Observable<Contact[]> = this.http.get('/api/contacts') as Observable<Contact[]>;
+  contacts$: BehaviorSubject<Contact[]> = new BehaviorSubject<Contact[]>([]);
 
-  private readonly selectedContact: BehaviorSubject<Contact>;
+  private readonly selectedContact: BehaviorSubject<Contact> = new BehaviorSubject<Contact>({} as Contact);
 
-  constructor(private http: HttpClient) {
-    // TODO: remove defualt and handle login
-    this.selectedContact = new BehaviorSubject<Contact>({
-      name: 'Vanessa Tucker',
-      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar5.png',
-      status: 'Online',
-      badge: 5,
+  constructor(private userService: UserService, private http: HttpClient) {
+    this.http.get('/api/contacts').subscribe((contacts) => {
+      this.contacts$.next(contacts as Contact[]);
+      (contacts as Contact[]).forEach((contact) => {
+        this.userService.createNewUser(contact.name, contact.avatarUrl, false);
+      });
     });
 
-    this.contacts$.subscribe((contacts: Contact[]) => {
-      this.setSelectedContact(contacts[0]);
-    });
+    this.contacts$.subscribe((contacts: Contact[]) => this.setSelectedContact(contacts[0]));
   }
 
   getContacts(): Observable<Contact[]> {
