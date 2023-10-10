@@ -8,7 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html,.json,.yaml,.yml}\"",
+    "format:check": "prettier --config ./.prettierrc --list-different .",
     "format:prettier": "npx prettier --write . --check"
   },
   "private": true,
