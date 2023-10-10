@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Message } from '../chats/chat/chat-history/message.model';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import * as uuid from 'uuid';
 
