@@ -1,10 +1,10 @@
 <div class="py-2 px-4 border-bottom d-none d-lg-block">
   <div class="d-flex align-items-center py-1">
     <div class="position-relative pe-none user-select-none">
-      <img [src]="contact.avatarUrl" class="rounded-circle mr-1" [alt]="contact.name" width="40" height="40" />
+      <img [src]="contact?.avatarUrl" class="rounded-circle mr-1" [alt]="contact?.name" width="40" height="40" />
     </div>
     <div class="flex-grow-1 px-3 pe-none user-select-none">
-      <strong>{{ contact.name }}</strong>
+      <strong>{{ contact?.name }}</strong>
       <div class="text-muted small"><em>Typing...</em></div>
     </div>
     <div>
