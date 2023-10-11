@@ -36,6 +36,12 @@ export class UserService {
     return this.user$;
   }
 
+  logout(): void {
+    localStorage.removeItem(this.local_storage_current_user_id_key);
+    this.user$.next({} as any);
+    this.reloadWindow();
+  }
+
   createNewUser(name: string, avatarUrl: string, isOnline: boolean = false): Observable<User> {
     if (!name) {
       name = prompt('Please enter your name') || 'Harry Potter';
@@ -56,9 +62,7 @@ export class UserService {
     }) as Observable<User>;
   }
 
-  logout(): void {
-    localStorage.removeItem(this.local_storage_current_user_id_key);
-    this.user$.next({} as any);
+  private reloadWindow() {
     window.location.reload();
   }
 

@@ -22,6 +22,7 @@ describe('AppComponent', () => {
         ChatMessageComponent,
       ],
     }).compileComponents();
+    spyOn(window, 'prompt').and.returnValue('test');
   });
 
   it('should create the app', () => {
