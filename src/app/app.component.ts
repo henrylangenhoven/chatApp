@@ -14,7 +14,7 @@ export class AppComponent {
 
   constructor(private userService: UserService) {
     this.userService
-      .getCurrentUserOrCreate()
+      .login()
       .pipe(takeUntilDestroyed())
       .subscribe((value) => (this.user = value));
   }

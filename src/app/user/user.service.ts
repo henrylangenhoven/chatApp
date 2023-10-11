@@ -2,65 +2,41 @@ import { Injectable } from '@angular/core';
 import * as uuid from 'uuid';
 import { User } from './user.model';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private readonly userId: string;
-  private user$: Observable<User> = of({});
+  private readonly local_storage_current_user_id_key = `currentUserId`;
+  private user$: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
 
-  constructor(private http: HttpClient) {
-    this.userId = this.getCurrentUserId();
-  }
+  constructor(private http: HttpClient) {}
 
-  getCurrentUserId(): string {
-    if (!!this.userId) {
-      return this.userId;
+  login(): Observable<User> {
+    let currentUserId = localStorage.getItem(this.local_storage_current_user_id_key);
+    let currentUser: User;
+    if (!!currentUserId) {
+      this.http.get(`/api/users/${currentUserId}`).subscribe((user) => {
+        currentUser = user as User;
+        this.user$.next(currentUser);
+      });
+    } else {
+      this.createNewUser('', '', true).subscribe((user) => {
+        currentUser = user as User;
+        if (!currentUser) return;
+
+        currentUserId = currentUser.id!!;
+        localStorage.setItem(this.local_storage_current_user_id_key, currentUserId);
+
+        this.user$.next(currentUser);
+      });
     }
 
-    let userIdFromStorage = localStorage.getItem(`userId`);
-    if (!userIdFromStorage) {
-      let value = uuid.v4();
-      try {
-        localStorage.setItem(`userId`, value);
-        userIdFromStorage = value;
-      } catch (e) {
-        console.error(`Unable to save userId to localStorage`, e);
-        userIdFromStorage = '';
-      }
-    }
-
-    return userIdFromStorage;
+    return this.user$;
   }
 
-  getCurrentUserOrCreate(): Observable<User> {
-    return this.user$.pipe(
-      switchMap((value) => {
-        if (!!value && !!value.id) {
-          return of(value);
-        }
-
-        return (this.http.get(`/api/users/${this.getCurrentUserId()}`) as Observable<User>).pipe(
-          catchError((err) => {
-            console.error('failed to get user with id', this.getCurrentUserId(), err);
-            return of(null);
-          }),
-          switchMap((user) => {
-            if (!!user) {
-              this.user$ = of(user);
-              return of(user);
-            }
-
-            return this.createNewUser('', '', true);
-          })
-        );
-      })
-    );
-  }
-
-  createNewUser(name: string, avatarUrl: string, isOnline: boolean): Observable<User> {
+  createNewUser(name: string, avatarUrl: string, isOnline: boolean = false): Observable<User> {
     if (!name) {
       name = prompt('Please enter your name') || 'Harry Potter';
     }
@@ -80,13 +56,9 @@ export class UserService {
     }) as Observable<User>;
   }
 
-  isOnline(userId: string): boolean {
-    return true; // TODO: implement
-  }
-
   logout(): void {
-    localStorage.removeItem(`userId`);
-    this.user$ = of({});
+    localStorage.removeItem(this.local_storage_current_user_id_key);
+    this.user$.next({} as any);
     window.location.reload();
   }
 
