@@ -2,7 +2,8 @@ import { TestBed } from '@angular/core/testing';
 
 import { UserService } from './user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
+import { User } from './user.model';
 
 describe('UserService', () => {
   let userService: UserService;
@@ -54,6 +55,17 @@ describe('UserService', () => {
       expect((userService as any).http.post).toHaveBeenCalledWith('/api/users', jasmine.any(Object));
     });
 
+    it('should create a new current user', (done: DoneFn) => {
+      spyOn(userService, 'createNewUser').and.returnValue(of({ id: 'test-id' }));
+      (userService as any).createNewCurrentUser().subscribe((user: User) => {
+        expect(user).toBeTruthy();
+        expect(user.id).toBeTruthy();
+        expect(window.localStorage.setItem).toHaveBeenCalledWith('currentUserId', user.id!);
+        expect(userService.createNewUser).toHaveBeenCalled();
+        done();
+      });
+    });
+
     it('should  generate random numbers between the specified range', () => {
       const randomNumber = (userService as any).getRandomNumberBetween(1, 8);
       expect(randomNumber).toBeGreaterThanOrEqual(1);
@@ -80,6 +92,20 @@ describe('UserService', () => {
         done();
       });
       expect((userService as any).http.get).not.toHaveBeenCalled();
+    });
+
+    it("should login if current user id can't be found", (done: DoneFn) => {
+      window.localStorage.setItem('currentUserId', 'test-id');
+      spyOn((userService as any).http, 'get').and.callFake(() => throwError(() => new Error('test')));
+      spyOn(userService as any, 'createNewCurrentUser').and.returnValue(of({ id: 'test-id' }));
+
+      userService.login().subscribe((user) => {
+        expect(user).toBeTruthy();
+        expect(user.id).toBe('test-id');
+        expect(window.localStorage.setItem).toHaveBeenCalledWith('currentUserId', 'test-id');
+        expect((userService as any).createNewCurrentUser).toHaveBeenCalled();
+        done();
+      });
     });
   });
 });

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as uuid from 'uuid';
 import { User } from './user.model';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,25 +15,17 @@ export class UserService {
 
   login(): Observable<User> {
     let currentUserId = localStorage.getItem(this.local_storage_current_user_id_key);
-    let currentUser: User;
-    if (!!currentUserId) {
-      this.http.get(`/api/users/${currentUserId}`).subscribe((user) => {
-        currentUser = user as User;
-        this.user$.next(currentUser);
-      });
-    } else {
-      this.createNewUser('', '', true).subscribe((user) => {
-        currentUser = user as User;
-        if (!currentUser) return;
 
-        currentUserId = currentUser.id!!;
-        localStorage.setItem(this.local_storage_current_user_id_key, currentUserId);
-
-        this.user$.next(currentUser);
-      });
+    if (!currentUserId) {
+      return this.createNewCurrentUser();
     }
 
-    return this.user$;
+    return this.http.get(`/api/users/${currentUserId}`).pipe(
+      catchError(() => this.createNewCurrentUser()),
+      map((user: User) => {
+        return user;
+      })
+    );
   }
 
   logout(): void {
@@ -62,11 +54,20 @@ export class UserService {
     }) as Observable<User>;
   }
 
-  private reloadWindow() {
+  private createNewCurrentUser(): Observable<User> {
+    return this.createNewUser('', '', true).pipe(
+      map((user: User) => {
+        localStorage.setItem(this.local_storage_current_user_id_key, user.id!);
+        return user;
+      })
+    );
+  }
+
+  private reloadWindow(): void {
     window.location.reload();
   }
 
-  private getRandomNumberBetween(first: number, last: number) {
+  private getRandomNumberBetween(first: number, last: number): number {
     return Math.floor(Math.random() * last) + first;
   }
 }
