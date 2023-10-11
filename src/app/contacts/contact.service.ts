@@ -13,10 +13,10 @@ export class ContactService {
   private readonly selectedContact: BehaviorSubject<Contact> = new BehaviorSubject<Contact>({} as Contact);
 
   constructor(private userService: UserService, private http: HttpClient) {
-    this.http.get('/api/contacts').subscribe((contacts) => {
+    this.http.get('/api/users').subscribe((contacts) => {
       this.contacts$.next(contacts as Contact[]);
       (contacts as Contact[]).forEach((contact) => {
-        this.userService.createNewUser(contact.name, contact.avatarUrl, false);
+        // this.userService.createNewUser(contact.name, contact.avatarUrl, false);
       });
     });
 
