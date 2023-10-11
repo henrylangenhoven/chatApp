@@ -36,7 +36,7 @@ export class UserService {
 
   createNewUser(name: string, avatarUrl: string, isOnline: boolean = false): Observable<User> {
     if (!name) {
-      name = prompt('Please enter your name') || 'Harry Potter';
+      name = prompt('Please enter your name') || 'Henry Langenhoven';
     }
 
     if (!avatarUrl) {
@@ -52,6 +52,10 @@ export class UserService {
       createdDate: new Date(),
       isOnline,
     }) as Observable<User>;
+  }
+
+  getCurrentUserId(): string | null {
+    return localStorage.getItem(this.local_storage_current_user_id_key);
   }
 
   private createNewCurrentUser(): Observable<User> {

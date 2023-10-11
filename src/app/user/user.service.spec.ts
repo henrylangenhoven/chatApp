@@ -77,6 +77,11 @@ describe('UserService', () => {
       expect(randomNumber).not.toBeLessThan(1);
       expect(randomNumber).not.toBeGreaterThan(8);
     });
+
+    it('should get current userId', () => {
+      window.localStorage.setItem('currentUserId', 'test-id');
+      expect(userService.getCurrentUserId()).toBe('test-id');
+    });
   });
 
   describe('Negative Tests', () => {
