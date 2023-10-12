@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Contact } from './contact.model';
 import { ContactService } from '../contact.service';
+import { User } from '../../user/user.model';
 
 @Component({
   selector: 'app-contact-item',
@@ -8,10 +8,10 @@ import { ContactService } from '../contact.service';
   styleUrls: ['./contact-item.component.scss'],
 })
 export class ContactItemComponent {
-  @Input() public contact: Contact = {
+  @Input() public contact: User = {
     name: 'Dummy',
     avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar1.png',
-    status: 'Online',
+    isOnline: true,
     badge: 5,
   };
 

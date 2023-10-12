@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Contact } from '../../../contacts/contact-item/contact.model';
+import { User } from '../../../user/user.model';
 
 @Component({
   selector: 'app-chat-header',
@@ -7,7 +7,7 @@ import { Contact } from '../../../contacts/contact-item/contact.model';
   styleUrls: ['./chat-header.component.scss'],
 })
 export class ChatHeaderComponent {
-  @Input() contact: Contact = {} as Contact;
+  @Input() contact: User = {} as User;
 
   settingsClicked() {
     alert('settings clicked');

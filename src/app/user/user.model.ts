@@ -4,4 +4,5 @@ export interface User {
   avatarUrl?: string;
   createdDate?: Date;
   isOnline?: boolean;
+  badge?: number;
 }

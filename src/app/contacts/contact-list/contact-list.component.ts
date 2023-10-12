@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Contact } from '../contact-item/contact.model';
 import { ContactService } from '../contact.service';
 import { Observable, of } from 'rxjs';
+import { User } from '../../user/user.model';
 
 @Component({
   selector: 'app-contact-list',
@@ -10,7 +10,7 @@ import { Observable, of } from 'rxjs';
 })
 export class ContactListComponent implements OnInit {
   public filterValue: string = '';
-  public contacts$: Observable<Contact[]> = of([]);
+  public contacts$: Observable<User[]> = of([]);
 
   constructor(private contactService: ContactService) {}
 

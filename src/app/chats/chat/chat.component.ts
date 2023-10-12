@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Contact } from '../../contacts/contact-item/contact.model';
 import { ContactService } from '../../contacts/contact.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { User } from '../../user/user.model';
 
 @Component({
   selector: 'app-chat',
@@ -9,7 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent {
-  public contact: Contact = {} as Contact;
+  public contact: User = {} as User;
 
   constructor(private contactService: ContactService) {
     this.contactService
