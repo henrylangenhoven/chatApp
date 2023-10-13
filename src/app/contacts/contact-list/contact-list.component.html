@@ -1,12 +1,12 @@
 <div class="px-4 d-none d-md-block">
   <div class="d-flex align-items-center">
     <div class="flex-grow-1">
-      <input #searchBox
-             type="text"
-             class="form-control my-3"
-             placeholder="Search..."
-             (keyup)="filterContacts()"
-             [(ngModel)]="filterValue"
+      <input
+        type="text"
+        class="form-control my-3"
+        placeholder="Search..."
+        (keyup)="filterContacts()"
+        [(ngModel)]="filterValue"
       />
     </div>
   </div>
