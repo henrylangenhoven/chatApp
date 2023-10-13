@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { MessageService } from '../../../messages/message.service';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-chat-message',
@@ -7,12 +6,19 @@ import { MessageService } from '../../../messages/message.service';
   styleUrls: ['./chat-message.component.scss'],
 })
 export class ChatMessageComponent {
+  @ViewChild('messageBox') messageBox: ElementRef<HTMLInputElement> = {} as ElementRef;
+  @Output() newMessageSent = new EventEmitter<string>();
   message: string = '';
 
-  constructor(private messageService: MessageService) {}
+  focusMessageBox(): void {
+    //  TODO: implement this
+    setTimeout(() => {
+      this.messageBox.nativeElement.focus();
+    }, 0);
+  }
 
   send() {
-    this.messageService.sendMessage(this.message);
+    this.newMessageSent.emit(this.message);
     this.message = '';
   }
 }

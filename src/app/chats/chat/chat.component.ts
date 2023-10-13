@@ -5,6 +5,7 @@ import { filter, mergeMap, of } from 'rxjs';
 import { MessageService } from '../../messages/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Conversation } from '../../messages/conversation.model';
+import { Message } from '../../messages/message.model';
 
 @Component({
   selector: 'app-chat',
@@ -14,6 +15,7 @@ import { Conversation } from '../../messages/conversation.model';
 export class ChatComponent {
   public selectedUser: User = {} as User;
   public conversation: Conversation | never[] = {} as Conversation;
+  public messages: Message[] = [];
 
   constructor(private contactService: ContactService, private messageService: MessageService) {
     this.contactService
@@ -32,6 +34,11 @@ export class ChatComponent {
         if (!value) return;
 
         this.conversation = value;
+        this.messages = (this.conversation as Conversation).messages as Message[];
       });
+  }
+
+  newMessageSent(messageBody: string) {
+    this.messageService.sendMessage(this.conversation as Conversation, messageBody);
   }
 }

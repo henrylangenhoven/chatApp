@@ -10,15 +10,21 @@ import { User } from '../user/user.model';
 export class ContactService {
   contacts$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
+  private readonly currentUserId = this.userService.getCurrentUserId();
   private readonly selectedContact: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
 
   constructor(private userService: UserService, private http: HttpClient) {
-    this.http.get('/api/users').subscribe((contacts) => {
-      this.contacts$.next(contacts as User[]);
-      (contacts as User[]).forEach((contact) => {
-        // this.userService.createNewUser(contact.name, contact.avatarUrl, false);
+    this.currentUserId = this.userService.getCurrentUserId();
+
+    this.http
+      .get('/api/users')
+      .pipe(
+        map((users) => users as User[]),
+        map((users) => users.filter((user) => user.id !== this.currentUserId))
+      )
+      .subscribe((contacts) => {
+        this.contacts$.next(contacts as User[]);
       });
-    });
 
     this.contacts$.subscribe((contacts: User[]) => this.setSelectedContact(contacts[0]));
   }
@@ -30,9 +36,9 @@ export class ContactService {
   getFilteredContacts(filterValue: string): Observable<User[]> {
     return !!filterValue
       ? this.contacts$.pipe(
-          map((value) =>
+          map((value: User[]) =>
             value.filter(
-              (value) =>
+              (value: User) =>
                 !!value?.name!! && value.name.trim().toLowerCase().indexOf(filterValue.trim().toLowerCase()) !== -1
             )
           )

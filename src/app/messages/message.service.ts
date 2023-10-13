@@ -6,6 +6,7 @@ import * as uuid from 'uuid';
 import { ChatMessage } from '../chats/chat/chat-history/chat-message.model';
 import { Conversation } from './conversation.model';
 import { UserService } from '../user/user.service';
+import { Message } from './message.model';
 
 @Injectable({
   providedIn: 'root',
@@ -49,16 +50,23 @@ export class MessageService {
     }) as Observable<Conversation>;
   }
 
-  sendMessage(message: string): void {
-    let body = {
-      id: uuid.v4(),
-      myMessage: true,
-      time: '10am',
-      body: message,
-      name: 'You',
-      avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar1.png',
-    };
+  sendMessage(conversation: Conversation, messageBody: string): void {
+    if (!messageBody) return;
 
-    this.messages$.next([...this.messages$.getValue(), body]);
+    let message: Message = {
+      id: uuid.v4(),
+
+      subject: '',
+      creatorId: this.userService.getCurrentUserId()!,
+      messageBody: messageBody,
+      createdDate: new Date(),
+      isRead: false,
+    };
+    conversation.messages?.push(message);
+    this.updateConversation(conversation);
+  }
+
+  private updateConversation(conversation: Conversation): void {
+    this.http.put(`/api/conversations/${conversation.id}`, conversation).subscribe();
   }
 }
