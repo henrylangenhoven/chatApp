@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { ContactService } from '../../contacts/contact.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { User } from '../../user/user.model';
+import { filter, mergeMap, of } from 'rxjs';
+import { MessageService } from '../../messages/message.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Conversation } from '../../messages/conversation.model';
 
 @Component({
   selector: 'app-chat',
@@ -9,12 +12,26 @@ import { User } from '../../user/user.model';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent {
-  public contact: User = {} as User;
+  public selectedUser: User = {} as User;
+  public conversation: Conversation | never[] = {} as Conversation;
 
-  constructor(private contactService: ContactService) {
+  constructor(private contactService: ContactService, private messageService: MessageService) {
     this.contactService
       .getSelectedContact()
-      .pipe(takeUntilDestroyed())
-      .subscribe((contact) => (this.contact = contact));
+      .pipe(
+        takeUntilDestroyed(),
+        filter((user: User) => !!user),
+        mergeMap((user: User) => {
+          if (!user) return of([]);
+
+          this.selectedUser = user;
+          return this.messageService.getConversation(user?.id!);
+        })
+      )
+      .subscribe((value) => {
+        if (!value) return;
+
+        this.conversation = value;
+      });
   }
 }

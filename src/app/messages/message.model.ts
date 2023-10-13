@@ -5,4 +5,6 @@ export interface Message {
   messageBody?: string;
   createdDate?: Date;
   parentMessageId?: string;
+  isRead?: boolean;
+  isForwarded?: boolean;
 }

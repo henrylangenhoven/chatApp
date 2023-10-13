@@ -1,4 +1,4 @@
-export class Message {
+export class ChatMessage {
   // TODO: replace this with the Message interface from src\app\messages\message.model.ts
   name: string;
   body: string;
