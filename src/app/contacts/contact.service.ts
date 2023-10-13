@@ -10,6 +10,7 @@ import { User } from '../user/user.model';
 export class ContactService {
   contacts$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
+  private contacts: User[] = [];
   private readonly currentUserId = this.userService.getCurrentUserId();
   private readonly selectedContact: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
 
@@ -18,11 +19,9 @@ export class ContactService {
 
     this.http
       .get('/api/users')
-      .pipe(
-        map((users) => users as User[]),
-        map((users) => users.filter((user) => user.id !== this.currentUserId))
-      )
+      .pipe(map((users) => users as User[]))
       .subscribe((contacts) => {
+        this.contacts = contacts as User[];
         this.contacts$.next(contacts as User[]);
       });
 
@@ -30,12 +29,17 @@ export class ContactService {
   }
 
   getContacts(): Observable<User[]> {
-    return this.contacts$;
+    return this.contacts$.pipe(map((users) => users.filter((user) => user.id !== this.currentUserId)));
+  }
+
+  getContactById(id: string): User | undefined {
+    return this.contacts.filter((contact) => contact.id === id)[0];
   }
 
   getFilteredContacts(filterValue: string): Observable<User[]> {
     return !!filterValue
       ? this.contacts$.pipe(
+          map((users) => users.filter((user) => user.id !== this.currentUserId)),
           map((value: User[]) =>
             value.filter(
               (value: User) =>

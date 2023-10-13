@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import * as uuid from 'uuid';
 import { User } from './user.model';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private readonly local_storage_current_user_id_key = `currentUserId`;
-  private user$: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +29,6 @@ export class UserService {
 
   logout(): void {
     localStorage.removeItem(this.local_storage_current_user_id_key);
-    this.user$.next({} as any);
     this.reloadWindow();
   }
 

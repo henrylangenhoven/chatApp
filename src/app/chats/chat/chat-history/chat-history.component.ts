@@ -1,9 +1,8 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { ChatMessage } from './chat-message.model';
 import { Observable } from 'rxjs';
 import { MessageService } from '../../../messages/message.service';
 import { Conversation } from '../../../messages/conversation.model';
-import { Message } from '../../../messages/message.model';
+import { ChatMessage } from './chat-message.model';
 
 @Component({
   selector: 'app-chat-history',
@@ -14,9 +13,7 @@ export class ChatHistoryComponent implements OnInit, AfterViewInit {
   @ViewChild('bottom') bottomElement: ElementRef<HTMLInputElement> = {} as ElementRef;
 
   @Input() conversation: Observable<Conversation> = {} as Observable<Conversation>;
-  @Input() messages: Message[] = [];
-
-  public messages$: Observable<ChatMessage[]> = this.messageService.getMessages();
+  @Input() chatMessages: ChatMessage[] = [];
 
   constructor(private messageService: MessageService) {}
 
@@ -25,7 +22,7 @@ export class ChatHistoryComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.messages$ = this.messageService.getMessages();
+    // this.messages$ = this.messageService.getMessages();
   }
 
   scrollToBottom(): void {

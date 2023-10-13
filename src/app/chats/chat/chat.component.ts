@@ -6,6 +6,7 @@ import { MessageService } from '../../messages/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Conversation } from '../../messages/conversation.model';
 import { Message } from '../../messages/message.model';
+import { ChatMessage } from './chat-history/chat-message.model';
 
 @Component({
   selector: 'app-chat',
@@ -15,7 +16,7 @@ import { Message } from '../../messages/message.model';
 export class ChatComponent {
   public selectedUser: User = {} as User;
   public conversation: Conversation | never[] = {} as Conversation;
-  public messages: Message[] = [];
+  public chatMessages: ChatMessage[] = [];
 
   constructor(private contactService: ContactService, private messageService: MessageService) {
     this.contactService
@@ -34,7 +35,10 @@ export class ChatComponent {
         if (!value) return;
 
         this.conversation = value;
-        this.messages = (this.conversation as Conversation).messages as Message[];
+
+        this.chatMessages = this.messageService.convertMessagesToChatMessages(
+          (this.conversation as Conversation).messages as Message[]
+        );
       });
   }
 

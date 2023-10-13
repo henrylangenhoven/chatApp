@@ -7,6 +7,7 @@ import { ChatMessage } from '../chats/chat/chat-history/chat-message.model';
 import { Conversation } from './conversation.model';
 import { UserService } from '../user/user.service';
 import { Message } from './message.model';
+import { ContactService } from '../contacts/contact.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,25 @@ import { Message } from './message.model';
 export class MessageService {
   messages$: BehaviorSubject<ChatMessage[]> = new BehaviorSubject<ChatMessage[]>([]);
 
-  constructor(private http: HttpClient, private userService: UserService) {
+  constructor(private http: HttpClient, private contactService: ContactService, private userService: UserService) {
     this.http.get('/api/messages').subscribe((messages) => this.messages$.next(messages as ChatMessage[]));
+  }
+
+  convertMessagesToChatMessages(messages: Message[]): ChatMessage[] {
+    return messages.map((message) => {
+      let creatorUser = this.contactService.getContactById(message.creatorId!);
+      let currentUserId = this.userService.getCurrentUserId();
+
+      let createdDate = new Date(message.createdDate + '');
+      return {
+        name: creatorUser?.name,
+        body: message.messageBody,
+        time: createdDate.toLocaleTimeString(),
+        date: createdDate.toDateString(),
+        avatarUrl: creatorUser?.avatarUrl,
+        myMessage: message.creatorId === currentUserId,
+      } as ChatMessage;
+    });
   }
 
   getMessages(): Observable<ChatMessage[]> {
@@ -55,8 +73,6 @@ export class MessageService {
 
     let message: Message = {
       id: uuid.v4(),
-
-      subject: '',
       creatorId: this.userService.getCurrentUserId()!,
       messageBody: messageBody,
       createdDate: new Date(),

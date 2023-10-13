@@ -2,8 +2,8 @@
   <div class="chat-messages p-4">
     <app-chat-history-item
       (newMessageAppears)="scrollToBottom()"
-      *ngFor="let message of messages"
-      [message2]="message"
+      *ngFor="let message of chatMessages"
+      [message]="message"
     ></app-chat-history-item>
     <div #bottom></div>
   </div>

@@ -1,8 +1,8 @@
 export class ChatMessage {
-  // TODO: replace this with the Message interface from src\app\messages\message.model.ts
-  name: string;
-  body: string;
-  time: string;
+  name?: string;
+  body?: string;
+  time?: string;
+  date?: string;
   myMessage?: boolean;
   avatarUrl?: string;
 
