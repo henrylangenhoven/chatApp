@@ -19,7 +19,7 @@ export class UserService {
       return this.createNewCurrentUser();
     }
 
-    return this.http.get(`/api/users/${currentUserId}`).pipe(
+    return this.getUserFromDb(currentUserId).pipe(
       catchError(() => this.createNewCurrentUser()),
       map((user: User) => {
         return user;
@@ -43,13 +43,7 @@ export class UserService {
         `https://bootdey.com/img/Content/avatar/avatar${this.getRandomNumberBetween(1, 8)}.png`;
     }
 
-    return this.http.post('/api/users', {
-      id: uuid.v4(),
-      name,
-      avatarUrl,
-      createdDate: new Date(),
-      isOnline,
-    }) as Observable<User>;
+    return this.postUserToDb(name, avatarUrl, isOnline);
   }
 
   getCurrentUserId(): string | null {
@@ -63,6 +57,20 @@ export class UserService {
         return user;
       })
     );
+  }
+
+  private getUserFromDb(userId: string) {
+    return this.http.get(`/api/users/${userId}`);
+  }
+
+  private postUserToDb(name: string, avatarUrl: string, isOnline: boolean) {
+    return this.http.post('/api/users', {
+      id: uuid.v4(),
+      name,
+      avatarUrl,
+      createdDate: new Date(),
+      isOnline,
+    }) as Observable<User>;
   }
 
   private reloadWindow(): void {

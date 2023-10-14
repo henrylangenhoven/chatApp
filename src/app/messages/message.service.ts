@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, EMPTY, map, mergeMap, Observable, of } from 'rxjs';
+import { BehaviorSubject, EMPTY, map, mergeMap, Observable, of, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import * as uuid from 'uuid';
 import { ChatMessage } from '../chats/chat/chat-history/chat-message.model';
@@ -13,10 +13,10 @@ import { ContactService } from '../contacts/contact.service';
   providedIn: 'root',
 })
 export class MessageService {
-  messages$: BehaviorSubject<ChatMessage[]> = new BehaviorSubject<ChatMessage[]>([]);
+  conversations$: BehaviorSubject<Conversation[]> = new BehaviorSubject<Conversation[]>([]);
 
   constructor(private http: HttpClient, private contactService: ContactService, private userService: UserService) {
-    this.http.get('/api/messages').subscribe((messages) => this.messages$.next(messages as ChatMessage[]));
+    this.loadConversationsFromDb();
   }
 
   convertMessagesToChatMessages(messages: Message[]): ChatMessage[] {
@@ -36,39 +36,31 @@ export class MessageService {
     });
   }
 
-  getMessages(): Observable<ChatMessage[]> {
-    return this.messages$;
-  }
-
   getConversation(correspondentId: string): Observable<Conversation | undefined> {
     let currentUserId = this.userService.getCurrentUserId();
     if (!correspondentId || !currentUserId) {
       return EMPTY;
     }
 
-    return this.http.get('/api/conversations').pipe(
-      map((conversations) => conversations as Conversation[]),
+    return this.conversations$.pipe(
       map((conversations) => {
         return conversations.find((conversation) => {
           let users = conversation.users as string[];
-          return users.includes(currentUserId!) && users.includes(correspondentId);
+          let conversationExists = users.includes(currentUserId!) && users.includes(correspondentId);
+          return conversationExists;
         });
       }),
-      mergeMap((value) => (value ? of(value) : this.createConversation(correspondentId)))
+      mergeMap((value: Conversation | undefined) => {
+        return !!value ? of(value!) : this.createConversation(correspondentId);
+      })
     );
   }
 
   createConversation(correspondentId: string): Observable<Conversation> {
-    let currentUserId = this.userService.getCurrentUserId();
-
-    return this.http.post('/api/conversations', {
-      id: uuid.v4(),
-      users: [currentUserId, correspondentId],
-      messages: [],
-    }) as Observable<Conversation>;
+    return this.postConversationToDb(this.userService.getCurrentUserId()!, correspondentId);
   }
 
-  sendMessage(conversation: Conversation, messageBody: string): void {
+  sendMessage(conversation: Conversation, messageBody: string) {
     if (!messageBody) return;
 
     let message: Message = {
@@ -79,10 +71,42 @@ export class MessageService {
       isRead: false,
     };
     conversation.messages?.push(message);
-    this.updateConversation(conversation);
+    return this.updateConversationToDb(conversation);
   }
 
-  private updateConversation(conversation: Conversation): void {
-    this.http.put(`/api/conversations/${conversation.id}`, conversation).subscribe();
+  private loadConversationsFromDb() {
+    this.http
+      .get('/api/conversations')
+      .pipe(
+        take(1),
+        map((conversations) => conversations as Conversation[])
+      )
+      .subscribe((conversations) => this.conversations$.next(conversations));
+  }
+
+  private postConversationToDb(currentUserId: string | null, correspondentId: string): Observable<Conversation> {
+    return this.http
+      .post('/api/conversations', {
+        id: uuid.v4(),
+        users: [currentUserId, correspondentId],
+        messages: [],
+      })
+      .pipe(
+        take(1),
+        map((value) => {
+          return value as Conversation;
+        }),
+        tap(() => this.loadConversationsFromDb())
+      );
+  }
+
+  private updateConversationToDb(conversation: Conversation): Observable<Conversation> {
+    return this.http.put(`/api/conversations/${conversation.id}`, conversation).pipe(
+      take(1),
+      map((value) => {
+        return value as Conversation;
+      }),
+      tap(() => this.loadConversationsFromDb())
+    );
   }
 }
