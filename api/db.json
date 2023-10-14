@@ -1,134 +1,90 @@
 {
-  "users": [],
-  "contacts": [
+  "users": [
     {
-      "name": "Vanessa Tucker",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar5.png",
-      "status": "Online",
+      "id": "aec86403-64f0-4d9b-a788-ff7109635d0b",
+      "name": "Henry Langenhoven",
+      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar3.png",
+      "createdDate": "2023-10-11T15:48:31.485Z",
+      "isOnline": true,
       "badge": 5
     },
     {
+      "id": "67ffe475-306b-44cb-9b8c-28a9a72ef768",
+      "name": "Vanessa Tucker",
+      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar5.png",
+      "createdDate": "2023-10-11T16:08:18.552Z",
+      "isOnline": false,
+      "badge": 4
+    },
+    {
+      "id": "046737bf-38b4-431c-9a7e-4042c44b9e23",
       "name": "William Harris",
       "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar2.png",
-      "status": "Online",
+      "createdDate": "2023-10-11T16:08:18.557Z",
+      "isOnline": false,
+      "badge": 3
+    },
+    {
+      "id": "c6fbe2e0-d171-4167-bd43-109d05729821",
+      "name": "Sharon Lessman",
+      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar3.png",
+      "createdDate": "2023-10-11T16:08:18.562Z",
+      "isOnline": false,
       "badge": 2
     },
     {
-      "name": "Sharon Lessman",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar3.png",
-      "status": "Online"
-    },
-    {
+      "id": "935c2f5a-3c51-4a70-bd18-3c9a37092ec4",
       "name": "Christina Mason",
       "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar4.png",
-      "status": "Offline"
+      "createdDate": "2023-10-11T16:08:18.565Z",
+      "isOnline": false,
+      "badge": 1
     },
     {
+      "id": "6ff7bd9f-e98a-48b6-8d45-bd0dc382de9d",
       "name": "Fiona Green",
       "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar5.png",
-      "status": "Offline"
+      "createdDate": "2023-10-11T16:08:18.569Z",
+      "isOnline": false,
+      "badge": 8
     },
     {
+      "id": "de92208c-be66-4bb2-9bc6-aaca6ea33738",
       "name": "Doris Wilder",
       "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar2.png",
-      "status": "Offline"
+      "createdDate": "2023-10-11T16:08:18.573Z",
+      "isOnline": false,
+      "badge": 0
     },
     {
+      "id": "2466bf83-7d65-4eba-99c0-ee16e614176d",
       "name": "Haley Kennedy",
       "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar4.png",
-      "status": "Offline"
+      "createdDate": "2023-10-11T16:08:18.579Z",
+      "isOnline": false,
+      "badge": 6
     },
     {
+      "id": "165039dd-44f3-455d-82ed-415b0b19d2d9",
       "name": "Jennifer Chang",
       "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar3.png",
-      "status": "Offline"
+      "createdDate": "2023-10-11T16:08:18.582Z",
+      "isOnline": false
+    },
+    {
+      "id": "ef1c9d98-fc15-4a96-ad07-b0ee61faa168",
+      "name": "TEST",
+      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar1.png",
+      "createdDate": "2023-10-13T14:53:08.502Z",
+      "isOnline": true
+    },
+    {
+      "id": "cf03fde2-7327-4ae6-a1fe-3dbc54528451",
+      "name": "Henry",
+      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar2.png",
+      "createdDate": "2023-10-13T15:48:15.939Z",
+      "isOnline": true
     }
   ],
-  "messages": [
-    {
-      "name": "Dummy Dum",
-      "body": "dummy",
-      "time": "2:33am",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar7.png",
-      "myMessage": true
-    },
-    {
-      "name": "You",
-      "body": "        Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar1.png",
-      "time": "2:33 am",
-      "myMessage": true
-    },
-    {
-      "name": "Sharon Lessman",
-      "body": "        Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar3.png",
-      "time": "2:34 am"
-    },
-    {
-      "name": "You",
-      "body": "        Cum ea graeci tractatos.",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar1.png",
-      "time": "2:35 am",
-      "myMessage": true
-    },
-    {
-      "name": "Sharon Lessman",
-      "body": "        Sed pulvinar, massa vitae interdum pulvinar, risus lectus porttitor magna, vitae commodo lectus mauris et velit.",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar3.png",
-      "time": "2:36 am"
-    },
-    {
-      "name": "Sharon Lessman",
-      "body": "        Cras pulvinar, sapien id vehicula aliquet, diam velit elementum orci.",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar3.png",
-      "time": "2:37 am"
-    },
-    {
-      "name": "You",
-      "body": "        Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar1.png",
-      "time": "2:38 am",
-      "myMessage": true
-    },
-    {
-      "name": "Sharon Lessman",
-      "body": "        Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar3.png",
-      "time": "2:39 am"
-    },
-    {
-      "name": "You",
-      "body": "        Cum ea graeci tractatos.",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar1.png",
-      "time": "2:40 am",
-      "myMessage": true
-    },
-    {
-      "name": "You",
-      "body": "        Morbi finibus, lorem id placerat ullamcorper, nunc enim ultrices massa, id dignissim metus urna eget purus.",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar1.png",
-      "time": "2:41 am",
-      "myMessage": true
-    },
-    {
-      "name": "Sharon Lessman",
-      "body": "        Sed pulvinar, massa vitae interdum pulvinar, risus lectus porttitor magna, vitae commodo lectus mauris et velit.",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar3.png",
-      "time": "2:42 am"
-    },
-    {
-      "name": "You",
-      "body": "        Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar1.png",
-      "time": "2:43 am",
-      "myMessage": true
-    },
-    {
-      "name": "Sharon Lessman",
-      "body": "        Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.",
-      "avatarUrl": "https://bootdey.com/img/Content/avatar/avatar3.png",
-      "time": "2:44 am"
-    }
-  ]
+  "conversations": []
 }
