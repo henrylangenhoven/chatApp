@@ -58,11 +58,11 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "chatApp:build:production"
+              "buildTarget": "chatApp:build:production"
             },
             "development": {
-              "browserTarget": "chatApp:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "proxyConfig": "proxy.conf.json",
+              "buildTarget": "chatApp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -70,7 +70,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "chatApp:build"
+            "buildTarget": "chatApp:build"
           }
         },
         "test": {
