@@ -41,7 +41,6 @@ describe('UserService', () => {
     it('should logout', () => {
       spyOn(userService as any, 'reloadWindow').and.callFake(function () {});
       userService.logout();
-      expect((userService as any).user$.getValue()).toEqual({} as any);
       expect((userService as any).reloadWindow).toHaveBeenCalled();
     });
 

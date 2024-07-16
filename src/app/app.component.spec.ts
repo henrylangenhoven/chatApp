@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ContactListComponent } from './contacts/contact-list/contact-list.component';
@@ -9,6 +8,7 @@ import { ChatHistoryComponent } from './chats/chat/chat-history/chat-history.com
 import { ChatMessageComponent } from './chats/chat/chat-message/chat-message.component';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -21,8 +21,8 @@ describe('AppComponent', () => {
         ChatHistoryComponent,
         ChatMessageComponent,
       ],
-      imports: [RouterTestingModule, FormsModule],
-      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()],
+      imports: [FormsModule],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting(), provideRouter([])],
     }).compileComponents();
     spyOn(window, 'prompt').and.returnValue('test');
   });
