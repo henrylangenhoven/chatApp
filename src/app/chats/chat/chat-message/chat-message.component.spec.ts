@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChatMessageComponent } from './chat-message.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ChatMessageComponent', () => {
   let component: ChatMessageComponent;
@@ -11,7 +12,8 @@ describe('ChatMessageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ChatMessageComponent],
-      imports: [FormsModule, HttpClientTestingModule],
+      imports: [FormsModule],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ChatMessageComponent);

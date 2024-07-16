@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContactItemComponent } from './contact-item.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ContactItemComponent', () => {
   let component: ContactItemComponent;
@@ -10,7 +11,8 @@ describe('ContactItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ContactItemComponent],
-      imports: [HttpClientTestingModule],
+      imports: [],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ContactItemComponent);

@@ -12,7 +12,7 @@ import { ChatHistoryComponent } from './chats/chat/chat-history/chat-history.com
 import { ChatMessageComponent } from './chats/chat/chat-message/chat-message.component';
 import { ChatHistoryItemComponent } from './chats/chat/chat-history-item/chat-history-item.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,8 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     ChatMessageComponent,
     ChatHistoryItemComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgOptimizedImage, FormsModule],
-  providers: [],
   bootstrap: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, NgOptimizedImage, FormsModule],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class AppModule {}
