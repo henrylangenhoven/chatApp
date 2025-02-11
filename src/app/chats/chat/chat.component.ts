@@ -9,9 +9,10 @@ import { Message } from '../../messages/message.model';
 import { ChatMessage } from './chat-history/chat-message.model';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss'],
+    selector: 'app-chat',
+    templateUrl: './chat.component.html',
+    styleUrls: ['./chat.component.scss'],
+    standalone: false
 })
 export class ChatComponent {
   destroyRef = inject(DestroyRef);

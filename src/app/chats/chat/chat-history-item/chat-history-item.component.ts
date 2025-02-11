@@ -2,9 +2,10 @@ import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/
 import { ChatMessage } from '../chat-history/chat-message.model';
 
 @Component({
-  selector: 'app-chat-history-item',
-  templateUrl: './chat-history-item.component.html',
-  styleUrls: ['./chat-history-item.component.scss'],
+    selector: 'app-chat-history-item',
+    templateUrl: './chat-history-item.component.html',
+    styleUrls: ['./chat-history-item.component.scss'],
+    standalone: false
 })
 export class ChatHistoryItemComponent implements AfterViewInit {
   @Output() newMessageAppears = new EventEmitter<void>();

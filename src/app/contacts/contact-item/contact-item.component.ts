@@ -3,9 +3,10 @@ import { ContactService } from '../contact.service';
 import { User } from '../../user/user.model';
 
 @Component({
-  selector: 'app-contact-item',
-  templateUrl: './contact-item.component.html',
-  styleUrls: ['./contact-item.component.scss'],
+    selector: 'app-contact-item',
+    templateUrl: './contact-item.component.html',
+    styleUrls: ['./contact-item.component.scss'],
+    standalone: false
 })
 export class ContactItemComponent {
   @Input() public contact: User = {

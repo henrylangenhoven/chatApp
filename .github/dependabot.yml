@@ -1,0 +1,28 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: weekly
+      time: '12:00'
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+      time: '12:00'
+    groups:
+      angular-version:
+        patterns:
+          - '@angular*'
+      npm-dependencies:
+        update-types:
+          - major
+          - minor
+          - patch
+        exclude-patterns:
+          - '@angular*'
+  - package-ecosystem: docker
+    directory: '/'
+    schedule:
+      interval: weekly
+      time: '12:00'
