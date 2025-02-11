@@ -8,7 +8,7 @@ describe('ChatHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChatHeaderComponent],
+      imports: [ChatHeaderComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ChatHeaderComponent);

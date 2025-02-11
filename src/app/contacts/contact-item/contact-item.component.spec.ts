@@ -10,8 +10,7 @@ describe('ContactItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ContactItemComponent],
-      imports: [],
+      imports: [ContactItemComponent],
       providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()],
     }).compileComponents();
 

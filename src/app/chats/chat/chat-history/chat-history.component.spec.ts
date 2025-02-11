@@ -10,8 +10,7 @@ describe('ChatHistoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChatHistoryComponent],
-      imports: [],
+      imports: [ChatHistoryComponent],
       providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()],
     }).compileComponents();
 

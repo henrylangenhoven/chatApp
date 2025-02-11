@@ -7,12 +7,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Conversation } from '../../messages/conversation.model';
 import { Message } from '../../messages/message.model';
 import { ChatMessage } from './chat-history/chat-message.model';
+import { ChatHeaderComponent } from './chat-header/chat-header.component';
+import { ChatHistoryComponent } from './chat-history/chat-history.component';
+import { ChatMessageComponent } from './chat-message/chat-message.component';
 
 @Component({
-    selector: 'app-chat',
-    templateUrl: './chat.component.html',
-    styleUrls: ['./chat.component.scss'],
-    standalone: false
+  selector: 'app-chat',
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.scss'],
+  imports: [ChatHeaderComponent, ChatHistoryComponent, ChatMessageComponent],
 })
 export class ChatComponent {
   destroyRef = inject(DestroyRef);

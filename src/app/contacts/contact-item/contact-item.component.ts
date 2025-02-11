@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { ContactService } from '../contact.service';
 import { User } from '../../user/user.model';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-    selector: 'app-contact-item',
-    templateUrl: './contact-item.component.html',
-    styleUrls: ['./contact-item.component.scss'],
-    standalone: false
+  selector: 'app-contact-item',
+  templateUrl: './contact-item.component.html',
+  styleUrls: ['./contact-item.component.scss'],
+  imports: [NgIf, NgClass],
 })
 export class ContactItemComponent {
   @Input() public contact: User = {

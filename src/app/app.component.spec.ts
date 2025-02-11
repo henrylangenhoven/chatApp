@@ -13,15 +13,15 @@ import { provideRouter } from '@angular/router';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
+      declarations: [AppComponent],
+      imports: [
+        FormsModule,
         ContactListComponent,
         ChatComponent,
         ChatHeaderComponent,
         ChatHistoryComponent,
         ChatMessageComponent,
       ],
-      imports: [FormsModule],
       providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting(), provideRouter([])],
     }).compileComponents();
     spyOn(window, 'prompt').and.returnValue('test');
