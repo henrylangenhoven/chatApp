@@ -9,7 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "format:check": "prettier --config ./.prettierrc --list-different .",
-    "format:prettier": "npx prettier --write . --check"
+    "format:prettier": "npx prettier --write . --check",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
@@ -33,6 +34,7 @@
     "@angular/compiler-cli": "^19.1.5",
     "@types/jasmine": "~4.3.0",
     "@types/uuid": "^9.0.2",
+    "husky": "^9.1.7",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
