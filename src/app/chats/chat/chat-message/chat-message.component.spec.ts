@@ -11,8 +11,7 @@ describe('ChatMessageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChatMessageComponent],
-      imports: [FormsModule],
+      imports: [FormsModule, ChatMessageComponent],
       providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()],
     }).compileComponents();
 

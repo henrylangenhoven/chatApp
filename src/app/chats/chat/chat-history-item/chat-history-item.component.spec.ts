@@ -8,7 +8,7 @@ describe('ChatHistoryItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ChatHistoryItemComponent],
+      imports: [ChatHistoryItemComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ChatHistoryItemComponent);
