@@ -23,7 +23,10 @@ export class ChatComponent {
   public conversation: Conversation | never[] = {} as Conversation;
   public chatMessages$: BehaviorSubject<ChatMessage[]> = new BehaviorSubject([] as ChatMessage[]);
 
-  constructor(private contactService: ContactService, private messageService: MessageService) {
+  constructor(
+    private contactService: ContactService,
+    private messageService: MessageService,
+  ) {
     this.loadChatMessages();
   }
 
@@ -54,9 +57,9 @@ export class ChatComponent {
           this.conversation = value;
 
           return this.messageService.convertMessagesToChatMessages(
-            (this.conversation as Conversation)?.messages as Message[]
+            (this.conversation as Conversation)?.messages as Message[],
           );
-        })
+        }),
       )
       .subscribe((value) => {
         this.chatMessages$.next(value);

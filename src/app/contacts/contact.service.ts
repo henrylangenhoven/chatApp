@@ -14,7 +14,10 @@ export class ContactService {
   private readonly currentUserId = this.userService.getCurrentUserId();
   private readonly selectedContact: BehaviorSubject<User> = new BehaviorSubject<User>({} as User);
 
-  constructor(private userService: UserService, private http: HttpClient) {
+  constructor(
+    private userService: UserService,
+    private http: HttpClient,
+  ) {
     this.currentUserId = this.userService.getCurrentUserId();
 
     this.http
@@ -43,9 +46,9 @@ export class ContactService {
           map((value: User[]) =>
             value.filter(
               (value: User) =>
-                !!value?.name!! && value.name.trim().toLowerCase().indexOf(filterValue.trim().toLowerCase()) !== -1
-            )
-          )
+                !!value?.name!! && value.name.trim().toLowerCase().indexOf(filterValue.trim().toLowerCase()) !== -1,
+            ),
+          ),
         )
       : this.getContacts();
   }

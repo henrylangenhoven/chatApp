@@ -15,7 +15,11 @@ import { ContactService } from '../contacts/contact.service';
 export class MessageService {
   conversations$: BehaviorSubject<Conversation[]> = new BehaviorSubject<Conversation[]>([]);
 
-  constructor(private http: HttpClient, private contactService: ContactService, private userService: UserService) {
+  constructor(
+    private http: HttpClient,
+    private contactService: ContactService,
+    private userService: UserService,
+  ) {
     this.loadConversationsFromDb();
   }
 
@@ -52,7 +56,7 @@ export class MessageService {
       }),
       mergeMap((value: Conversation | undefined) => {
         return !!value ? of(value!) : this.createConversation(correspondentId);
-      })
+      }),
     );
   }
 
@@ -79,7 +83,7 @@ export class MessageService {
       .get('/api/conversations')
       .pipe(
         take(1),
-        map((conversations) => conversations as Conversation[])
+        map((conversations) => conversations as Conversation[]),
       )
       .subscribe((conversations) => this.conversations$.next(conversations));
   }
@@ -96,7 +100,7 @@ export class MessageService {
         map((value) => {
           return value as Conversation;
         }),
-        tap(() => this.loadConversationsFromDb())
+        tap(() => this.loadConversationsFromDb()),
       );
   }
 
@@ -106,7 +110,7 @@ export class MessageService {
       map((value) => {
         return value as Conversation;
       }),
-      tap(() => this.loadConversationsFromDb())
+      tap(() => this.loadConversationsFromDb()),
     );
   }
 }

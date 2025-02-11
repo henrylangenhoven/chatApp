@@ -23,7 +23,7 @@ export class UserService {
       catchError(() => this.createNewCurrentUser()),
       map((user: User) => {
         return user;
-      })
+      }),
     );
   }
 
@@ -55,7 +55,7 @@ export class UserService {
       map((user: User) => {
         localStorage.setItem(this.local_storage_current_user_id_key, user.id!);
         return user;
-      })
+      }),
     );
   }
 
