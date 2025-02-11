@@ -5,9 +5,10 @@ import { Conversation } from '../../../messages/conversation.model';
 import { ChatMessage } from './chat-message.model';
 
 @Component({
-  selector: 'app-chat-history',
-  templateUrl: './chat-history.component.html',
-  styleUrls: ['./chat-history.component.scss'],
+    selector: 'app-chat-history',
+    templateUrl: './chat-history.component.html',
+    styleUrls: ['./chat-history.component.scss'],
+    standalone: false
 })
 export class ChatHistoryComponent implements AfterViewInit {
   @ViewChild('bottom') bottomElement: ElementRef<HTMLInputElement> = {} as ElementRef;

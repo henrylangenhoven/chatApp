@@ -1,9 +1,10 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-chat-message',
-  templateUrl: './chat-message.component.html',
-  styleUrls: ['./chat-message.component.scss'],
+    selector: 'app-chat-message',
+    templateUrl: './chat-message.component.html',
+    styleUrls: ['./chat-message.component.scss'],
+    standalone: false
 })
 export class ChatMessageComponent {
   @ViewChild('messageBox') messageBox: ElementRef<HTMLInputElement> = {} as ElementRef;
