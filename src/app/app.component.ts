@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { UserService } from './user/user.service';
 import { User } from './user/user.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ContactListComponent } from './contacts/contact-list/contact-list.component';
+import { ChatComponent } from './chats/chat/chat.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: false,
+  imports: [ContactListComponent, ChatComponent],
 })
 export class AppComponent {
   title = 'chatApp';

@@ -13,7 +13,6 @@ import { provideRouter } from '@angular/router';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppComponent],
       imports: [
         FormsModule,
         ContactListComponent,
@@ -21,6 +20,7 @@ describe('AppComponent', () => {
         ChatHeaderComponent,
         ChatHistoryComponent,
         ChatMessageComponent,
+        AppComponent,
       ],
       providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting(), provideRouter([])],
     }).compileComponents();
