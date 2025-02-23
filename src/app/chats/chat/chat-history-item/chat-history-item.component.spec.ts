@@ -19,4 +19,10 @@ describe('ChatHistoryItemComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit newMessageAppears after view initialization', () => {
+    const emitSpy = spyOn(component.newMessageAppears, 'emit');
+    component.ngAfterViewInit();
+    expect(emitSpy).toHaveBeenCalled();
+  });
 });
