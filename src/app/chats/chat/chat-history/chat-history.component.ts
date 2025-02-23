@@ -1,9 +1,8 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { MessageService } from '../../../messages/message.service';
 import { Conversation } from '../../../messages/conversation.model';
 import { ChatMessage } from './chat-message.model';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgFor } from '@angular/common';
 import { ChatHistoryItemComponent } from '../chat-history-item/chat-history-item.component';
 
 @Component({
@@ -18,7 +17,7 @@ export class ChatHistoryComponent implements AfterViewInit {
   @Input() conversation: Observable<Conversation> = {} as Observable<Conversation>;
   @Input() chatMessages$: Observable<ChatMessage[]> = of([]);
 
-  constructor(private messageService: MessageService) {}
+  constructor() {}
 
   ngAfterViewInit(): void {
     this.scrollToBottom();
